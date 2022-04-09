@@ -37,6 +37,7 @@ public class PerfectAmeba : MonoBehaviour
             supameba = gameObject.GetComponent<PerfectAmeba>();
             supameba.intellect = new PerfectIntellect(intellect);
             supameba.intellect.Mutate();
+            intellect.Energy /= 2;
         }
         List<float> result = intellect.Think(GetInformation());
         rb2d.velocity += new Vector2(result[0] * intellect.genom.Speed * (result[2] + 1) / 2, result[1] * intellect.genom.Speed * (result[2] + 1) / 2);
@@ -55,25 +56,25 @@ public class PerfectAmeba : MonoBehaviour
         AddInfoOnDiraction(information, new Vector3(1,1,0));
         return information;
     }
-    void AddInfoOnDiraction(List<float> information, Vector3 diraction)
+    void AddInfoOnDiraction(List<float> information, Vector2 diraction)
     {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(diraction), out hit, intellect.genom.DetectionRadius))
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, diraction);
+        if (hit.collider != null)
         {
-            Vector3 vector = (hit.point - transform.position) / intellect.genom.DetectionRadius;
+            Vector2 vector = (hit.point - new Vector2(transform.position.x, transform.position.y)) / intellect.genom.DetectionRadius;
             information.Add(vector.x);
             information.Add(vector.y);
             information.Add(GetGradientFromTag(hit.transform.gameObject));
             //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-            Debug.Log("Did Hit");
+            //Debug.Log("Did Hit");
         }
         else
         {
             information.Add(0);
             information.Add(0);
             information.Add(0);
-            //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 20, Color.white);
-            Debug.Log("Did not Hit");
+            //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * intellect.genom.DetectionRadius, Color.white);
+            //Debug.Log("Did not Hit");
         }
     }
     float GetGradientFromTag(GameObject gameObject)

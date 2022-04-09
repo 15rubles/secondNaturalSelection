@@ -11,7 +11,7 @@ public class CameraMove : MonoBehaviour
     const float maxScale = 50f;
     const float minScale = 1f;
     float defaultScale, scaleChange = 0;
-    float cameraMoveSpeed = 10f;
+    float cameraMoveSpeed = 30f;
     float scrollInput;
 
     void Start()

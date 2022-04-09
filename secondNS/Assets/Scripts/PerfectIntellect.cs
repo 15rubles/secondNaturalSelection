@@ -48,7 +48,7 @@ public class PerfectIntellect
                 gens[i].FinitieNeuron = neurons[i];
             } while (IsBuildsWithHimself(gens[i]));
         }
-        for (int i = InputNeurons; i < InputNeurons + FreeGens; i++) // Привязать рандомные гены
+        for (int i = InputNeurons + OutputNeurons; i < GensCount; i++) // Привязать рандомные гены
         {
             do
             {
@@ -186,7 +186,7 @@ public class Genom
     public float DefenceSkill;
 
     // Скорость передвижения
-    public float Speed = 0.04f;
+    public float Speed = 0.05f;
     // Требуемое количество енергии для размножения
     public float EnergyForDublicate = 6;
     // Ежесекундное потребление енергии
@@ -196,7 +196,7 @@ public class Genom
     // Скорость поворота
     public float RotateSpeed = 8f;
     // Максмум статов от абсолютного максимума
-    public float MaxAttibutes = 3 / 5;
+    public float MaxAttibutes = 3f / 5f;
     #region Constants
     public float MutateChance = 0.005f;
     // Absorb borders
