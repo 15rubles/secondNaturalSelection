@@ -190,7 +190,7 @@ public class Genom
     // Требуемое количество енергии для размножения
     public float EnergyForDublicate = 6;
     // Ежесекундное потребление енергии
-    public float EatFoodPerSecond = 0.07f;
+    public float EatFoodPerSecond = 0.1f;
     // Радиус обнаружения
     public float DetectionRadius = 7f;
     // Скорость поворота
