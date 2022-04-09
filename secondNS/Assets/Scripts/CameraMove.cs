@@ -8,7 +8,7 @@ public class CameraMove : MonoBehaviour
     float lerpSpeed = 2f;
     public Vector3 movePos, movePlusTransform;
     Camera cam;
-    const float maxScale = 40f;
+    const float maxScale = 50f;
     const float minScale = 1f;
     float defaultScale, scaleChange = 0;
     float cameraMoveSpeed = 10f;
