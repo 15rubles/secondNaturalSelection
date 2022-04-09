@@ -28,22 +28,25 @@ public class PerfectIntellect
         {
             neurons.Add(new Neuron(Random.Range(LeftBiasBorder, RightBiasBorder)));
         }
-        int FreeGens = GensCount - (InputNeurons + OutputNeurons); // Сколько рандомных генов
+        int FreeGens = GensCount - (InputNeurons + OutputNeurons); // Сколько свободных генов
         for (int i = 0; i < GensCount; i++) // Создать все гены
         {
             gens.Add(new Gen(Random.Range(LeftGenBorder, RightGenBorder)));
         }
-        for (int i = 0; i < InputNeurons; i++) // Привязать гены (по количеству входных нейронов) к входным нейронам
+        for (int i = 0; i < InputNeurons; i++) // Найти входные нейроны и привязять гены к ним(по кол-ву нейронов)
         {
             inputneurons.Add(neurons[i]);
             gens[i].ElementaryNeuron = neurons[i];
             gens[i].FinitieNeuron = neurons[Random.Range(InputNeurons, NeuronsCount - 1)];
         }
-        for (int i = InputNeurons + FreeGens; i < NeuronsCount; i++) // Привязать гены (по количеству выходных нейронов) к выходным нейронам
+        for (int i = InputNeurons; i < InputNeurons + OutputNeurons; i++) // Привязать гены (по количеству выходных нейронов) к выходным нейронам
         {
-            outputneurons.Add(neurons[i]);
-            gens[i].ElementaryNeuron = neurons[Random.Range(0, InputNeurons + FreeGens - 1)];
-            gens[i].FinitieNeuron = neurons[i];
+            do
+            {
+                outputneurons.Add(neurons[i]);
+                gens[i].ElementaryNeuron = neurons[Random.Range(0, NeuronsCount - 1)];
+                gens[i].FinitieNeuron = neurons[i];
+            } while (IsBuildsWithHimself(gens[i]));
         }
         for (int i = InputNeurons; i < InputNeurons + FreeGens; i++) // Привязать рандомные гены
         {
@@ -51,7 +54,7 @@ public class PerfectIntellect
             {
                 gens[i].ElementaryNeuron = neurons[Random.Range(0, NeuronsCount - 1)];
                 gens[i].FinitieNeuron = neurons[Random.Range(InputNeurons, NeuronsCount - 1)];
-            } while (!IsBuildsWithHimself(gens[i]));
+            } while (IsBuildsWithHimself(gens[i]));
         }
         FillCalculateQueue();
         genom = new Genom();
@@ -175,6 +178,8 @@ public class PerfectIntellect
 }
 public class Genom
 {
+    public int Generation;
+    public float SecondName;
     // Parameters
     public float AbsorbSkill;
     public float AttackSkill;
@@ -206,6 +211,8 @@ public class Genom
     #endregion
     public Genom()
     {
+        Generation = 0;
+        SecondName = Random.Range(0f, 100f);
         do
         {
             AbsorbSkill = Random.Range(LeftAbsorbBorder, RightAbsorbBorder);
@@ -215,6 +222,8 @@ public class Genom
     }
     public Genom(Genom parent)
     {
+        Generation = parent.Generation + 1;
+        SecondName = parent.SecondName;
         AbsorbSkill = parent.AbsorbSkill;
         AttackSkill = parent.AttackSkill;
         DefenceSkill = parent.DefenceSkill;

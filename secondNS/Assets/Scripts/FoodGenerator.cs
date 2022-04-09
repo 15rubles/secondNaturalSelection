@@ -5,7 +5,7 @@ using UnityEngine;
 public class FoodGenerator : MonoBehaviour
 {
     GameObject food;
-    readonly int StartCount = 160;
+    readonly int StartCount = 350;
     readonly float timedelay = 0.03f;
     private float timer = 0;
     [SerializeField]
