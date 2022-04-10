@@ -74,16 +74,12 @@ public class PerfectAmeba : MonoBehaviour
             information.Add(vector.x);
             information.Add(vector.y);
             information.Add(GetGradientFromTag(hit.transform.gameObject));
-            //Debug.DrawRay(transform.position, transform.TransformDirection(new Vector3(diraction.x, diraction.y, 0)) * hit.distance, Color.yellow);
-            //Debug.Log("Did Hit " + hit.transform.gameObject.tag + " " + diraction);
         }
         else
         {
             information.Add(0);
             information.Add(0);
             information.Add(0);
-            //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * intellect.genom.DetectionRadius, Color.white);
-            //Debug.Log("Did not Hit");
         }
     }
     float GetGradientFromTag(GameObject gameObject)
@@ -115,7 +111,7 @@ public class PerfectAmeba : MonoBehaviour
     }
     string WhoIsThisAmeba(Genom genom)
     {
-        if (intellect.genom.SecondName == genom.SecondName)
+        if (intellect.genom.SecondName == genom.SecondName || intellect.genom.AttackSkill < genom.DefenceSkill && intellect.genom.DefenceSkill > genom.AttackSkill)
         {
             return "Friend";
         }
@@ -126,7 +122,7 @@ public class PerfectAmeba : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Food")
+        if (collision.gameObject.CompareTag("Food"))
         {
             intellect.Energy += intellect.genom.AbsorbSkill;
             Destroy(collision.gameObject);
@@ -134,7 +130,7 @@ public class PerfectAmeba : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ameba")
+        if (collision.gameObject.CompareTag("Ameba"))
         {
             intellectsup = collision.gameObject.GetComponent<PerfectAmeba>().intellect;
             if (intellectsup.genom.DefenceSkill < intellect.genom.AttackSkill && intellectsup.genom.SecondName != intellect.genom.SecondName)
@@ -146,7 +142,7 @@ public class PerfectAmeba : MonoBehaviour
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ameba")
+        if (collision.gameObject.CompareTag("Ameba"))
         {
             intellectsup = collision.gameObject.GetComponent<PerfectAmeba>().intellect;
             if (intellectsup.genom.DefenceSkill < intellect.genom.AttackSkill && intellectsup.genom.SecondName != intellect.genom.SecondName)

@@ -20,18 +20,17 @@ public class AmebaGenerator : MonoBehaviour
         {
             GameObject gameObject = Instantiate(ameba, new Vector3(Random.Range(leftborder, rightborder), Random.Range(upborder, downborder), 0), new Quaternion());
             amebaobj = gameObject.GetComponent<PerfectAmeba>();
-            amebaobj.intellect = new PerfectIntellect(37, 24, 3, 30);
+            amebaobj.intellect = new PerfectIntellect(24, 15, 3, 50);
             amebascount.Add(gameObject);
         }
     }
     private void FixedUpdate()
     {
-        //int size = amebascount.Count;
         for (int i = 0; i < amebascount.Count; i++)
         {
             if (amebascount[i] == null)
             {
-                amebascount.Remove(amebascount[i]); i--; //size--;
+                amebascount.Remove(amebascount[i]); i--;
             }
         }
         if(amebascount.Count <= 4)
@@ -40,7 +39,7 @@ public class AmebaGenerator : MonoBehaviour
             {
                 GameObject gameObject = Instantiate(ameba, new Vector3(Random.Range(leftborder, rightborder), Random.Range(upborder, downborder), 0), new Quaternion());
                 amebaobj = gameObject.GetComponent<PerfectAmeba>();
-                amebaobj.intellect = new PerfectIntellect(37, 24, 3, 30);
+                amebaobj.intellect = new PerfectIntellect(24, 15, 3, 50);
                 amebascount.Add(gameObject);
             }
         }

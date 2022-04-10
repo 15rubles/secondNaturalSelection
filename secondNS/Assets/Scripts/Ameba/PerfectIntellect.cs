@@ -22,13 +22,13 @@ public class PerfectIntellect
     const float RightBiasBorder = 0.05f;
     #endregion
     #region Constructors
-    public PerfectIntellect(int NeuronsCount, int InputNeurons, int OutputNeurons, int GensCount)
+    public PerfectIntellect(int InputNeurons, int InnerNeurons, int OutputNeurons, int GensCount)
     {
+        int NeuronsCount = InputNeurons + InnerNeurons + OutputNeurons;
         for (int i = 0; i < NeuronsCount; i++) // Создать все нейроны
         {
             neurons.Add(new Neuron(Random.Range(LeftBiasBorder, RightBiasBorder)));
         }
-        int FreeGens = GensCount - (InputNeurons + OutputNeurons); // Сколько свободных генов
         for (int i = 0; i < GensCount; i++) // Создать все гены
         {
             gens.Add(new Gen(Random.Range(LeftGenBorder, RightGenBorder)));
