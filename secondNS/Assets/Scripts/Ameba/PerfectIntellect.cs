@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class PerfectIntellect
 {
+    public int AllNeuronsCount;
+    public int AllGensCount;
+    public int InputNeuronsCount;
+    public int OutputNeuronsCount;
+
     public float LifeTime = 0;
     public float Energy = 2;
     public Genom genom;
     #region Private variebles
-    readonly private List<Neuron> neurons = new List<Neuron>();
-    readonly private List<Gen> gens = new List<Gen>();
-    readonly private List<Neuron> inputneurons = new List<Neuron>();
-    readonly private List<Neuron> outputneurons = new List<Neuron>();
-    readonly private List<Neuron> calculatequeue = new List<Neuron>();
+    public List<Neuron> neurons = new List<Neuron>();
+    public List<Gen> gens = new List<Gen>();
+    readonly public List<Neuron> inputneurons = new List<Neuron>();
+    readonly public List<Neuron> outputneurons = new List<Neuron>();
+    readonly public List<Neuron> calculatequeue = new List<Neuron>();
     #endregion
     #region Constants
     // Gen borders
@@ -25,8 +30,11 @@ public class PerfectIntellect
     #region Constructors
     public PerfectIntellect(int InputNeurons, int InnerNeurons, int OutputNeurons, int GensCount)
     {
-        int NeuronsCount = InputNeurons + InnerNeurons + OutputNeurons;
-        for (int i = 0; i < NeuronsCount; i++) // Создать все нейроны
+        InputNeuronsCount = InputNeurons;
+        OutputNeuronsCount = OutputNeurons;
+        AllGensCount = GensCount;
+        AllNeuronsCount = InputNeurons + InnerNeurons + OutputNeurons;
+        for (int i = 0; i < AllNeuronsCount; i++) // Создать все нейроны
         {
             neurons.Add(new Neuron(Random.Range(LeftBiasBorder, RightBiasBorder)));
         }
@@ -37,24 +45,39 @@ public class PerfectIntellect
         for (int i = 0; i < InputNeurons; i++) // Найти входные нейроны и привязять гены к ним(по кол-ву нейронов)
         {
             inputneurons.Add(neurons[i]);
+
             gens[i].ElementaryNeuron = neurons[i];
-            gens[i].FinitieNeuron = neurons[Random.Range(InputNeurons, NeuronsCount - 1)];
+            gens[i].ElementaryNeuronNumberInList = i;
+
+            int rand = Random.Range(InputNeurons, AllNeuronsCount - 1);
+            gens[i].FinitieNeuron = neurons[rand];
+            gens[i].FinitieNeuronNumberInList = rand;
         }
         for (int i = InputNeurons; i < InputNeurons + OutputNeurons; i++) // Привязать гены (по количеству выходных нейронов) к выходным нейронам
         {
             do
             {
                 outputneurons.Add(neurons[i]);
-                gens[i].ElementaryNeuron = neurons[Random.Range(0, NeuronsCount - 1)];
+
+                int rand = Random.Range(InputNeurons, AllNeuronsCount - 1);
+                gens[i].ElementaryNeuron = neurons[rand];
+                gens[i].ElementaryNeuronNumberInList = rand;
+
                 gens[i].FinitieNeuron = neurons[i];
+                gens[i].FinitieNeuronNumberInList = i;
             } while (IsBuildsWithHimself(gens[i]));
         }
         for (int i = InputNeurons + OutputNeurons; i < GensCount; i++) // Привязать рандомные гены
         {
             do
             {
-                gens[i].ElementaryNeuron = neurons[Random.Range(0, NeuronsCount - 1)];
-                gens[i].FinitieNeuron = neurons[Random.Range(InputNeurons, NeuronsCount - 1)];
+                int rand = Random.Range(InputNeurons, AllNeuronsCount - 1);
+                gens[i].ElementaryNeuron = neurons[rand];
+                gens[i].ElementaryNeuronNumberInList = rand;
+
+                rand = Random.Range(InputNeurons, AllNeuronsCount - 1);
+                gens[i].FinitieNeuron = neurons[rand];
+                gens[i].FinitieNeuronNumberInList = rand;
             } while (IsBuildsWithHimself(gens[i]));
         }
         FillCalculateQueue();
@@ -66,6 +89,11 @@ public class PerfectIntellect
         gens = parentintellect.gens.GetRange(0, parentintellect.gens.Count);
         inputneurons = parentintellect.inputneurons.GetRange(0, parentintellect.inputneurons.Count);
         outputneurons = parentintellect.outputneurons.GetRange(0, parentintellect.outputneurons.Count);
+        calculatequeue = parentintellect.calculatequeue.GetRange(0, parentintellect.calculatequeue.Count);
+        AllNeuronsCount = parentintellect.AllNeuronsCount;
+        AllGensCount = parentintellect.AllGensCount;
+        InputNeuronsCount = parentintellect.InputNeuronsCount;
+        OutputNeuronsCount = parentintellect.OutputNeuronsCount;
         genom = new Genom(parentintellect.genom);
     }
     #endregion
@@ -111,6 +139,24 @@ public class PerfectIntellect
             }
         }
         genom.Mutate();
+    }
+    public void ReloadAfterBirth()
+    {
+        inputneurons.Clear();
+        for (int i = 0; i < InputNeuronsCount; i++)
+        {
+            inputneurons.Add(neurons[i]);
+        }
+        for (int i = InputNeuronsCount; i < InputNeuronsCount + OutputNeuronsCount; i++)
+        {
+            outputneurons.Add(neurons[i]);
+        }
+        foreach (Gen gen in gens)
+        {
+            gen.ElementaryNeuron = neurons[gen.ElementaryNeuronNumberInList];
+            gen.FinitieNeuron = neurons[gen.FinitieNeuronNumberInList];
+        }
+        FillCalculateQueue();
     }
     #endregion
     #region Private methods
@@ -206,14 +252,14 @@ public class Genom
     #region Constants
     public float MutateChance = 0.005f;
     // Absorb borders
-    const float LeftAbsorbBorder = 0.2f;
-    const float RightAbsorbBorder = 1f;
+    public const float LeftAbsorbBorder = 0.2f;
+    public const float RightAbsorbBorder = 1f;
     // Attack borders
-    const float LeftAttackBorder = 0f;
-    const float RightAttackBorder = 1f;
+    public const float LeftAttackBorder = 0f;
+    public const float RightAttackBorder = 1f;
     // Defence borders
-    const float LeftDefenceBorder = 0;
-    const float RightDefenceBorder = 1;
+    public const float LeftDefenceBorder = 0;
+    public const float RightDefenceBorder = 1;
     #endregion
     public Genom()
     {
@@ -266,6 +312,8 @@ public class Neuron
 }
 public class Gen
 {
+    public int ElementaryNeuronNumberInList;
+    public int FinitieNeuronNumberInList;
     public Neuron ElementaryNeuron;
     public float Weight;
     public Neuron FinitieNeuron;

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Linq;
+﻿using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,25 +27,47 @@ public class PerfectAmeba : MonoBehaviour
     }
     void FixedUpdate()
     {
+        CountLifeTime();
+        SpendEnergyForLife();
+        CheckIfEnergyEnoughForLife();
+        CheckIfEnergyEnoughForDublicate();
+        MoveBody(intellect.Think(GetInformation()));
+    }
+    #region Private Methods
+    private void CountLifeTime()
+    {
         intellect.LifeTime += Time.fixedDeltaTime;
-        // Energy for live
+    }
+    private void SpendEnergyForLife()
+    {
         intellect.Energy -= intellect.genom.EatFoodPerSecond * Time.fixedDeltaTime;
-        // If energy is empty
+    }
+    private void CheckIfEnergyEnoughForLife()
+    {
         if (intellect.Energy <= 0)
             Destroy(gameObject);
-        if(intellect.Energy >= intellect.genom.EnergyForDublicate)
+    }
+    private void CheckIfEnergyEnoughForDublicate()
+    {
+        if (intellect.Energy >= intellect.genom.EnergyForDublicate)
         {
             GameObject gameObject = Instantiate(child, transform.position, new Quaternion());
             supameba = gameObject.GetComponent<PerfectAmeba>();
             supameba.intellect = new PerfectIntellect(intellect);
             supameba.intellect.Mutate();
+            supameba.amebaGenerator = amebaGenerator;
             amebaGenerator.AddAmebaInList(gameObject);
             intellect.Energy /= 2;
         }
-        List<float> result = intellect.Think(GetInformation());
-        rb2d.velocity += new Vector2(result[0] * intellect.genom.Speed * (result[2] + 1) / 2, result[1] * intellect.genom.Speed * (result[2] + 1.2f) / 2);
+    }
+    private void MoveBody(List<float> Desision)
+    {
+        //Debug.Log("Result: " + Desision[0] + " " + Desision[1] + " " + Desision[2]);
+        rb2d.velocity += new Vector2(Desision[0] * intellect.genom.Speed * (Desision[2] + 1) / 2, Desision[1] * intellect.genom.Speed * (Desision[2] + 1.1f) / 2);
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(new Vector3(0f, 0f, Mathf.Atan2(rb2d.velocity.y, rb2d.velocity.x) * Mathf.Rad2Deg - 90)), intellect.genom.RotateSpeed * Time.deltaTime);
     }
+    #endregion
+    #region Get Information To Think
     List<float> GetInformation()
     {
         List<float> information = new List<float>();
@@ -56,13 +77,15 @@ public class PerfectAmeba : MonoBehaviour
         AddInfoOnDiraction(information, new Vector2(-1,-1));
         AddInfoOnDiraction(information, new Vector2(0,-1));
         AddInfoOnDiraction(information, new Vector2(1,-1));
-        AddInfoOnDiraction(information, new Vector2(0,0));
+        AddInfoOnDiraction(information, new Vector2(0.0001f,0));
         AddInfoOnDiraction(information, new Vector2(1,1));
+        //Debug.Log("Info: " + information[0] + " " + information[1] + " " + information[2] + " " + information[3] + " " + information[4] + " " + information[5] + " " + information[6]);
         return information;
     }
     void AddInfoOnDiraction(List<float> information, Vector2 diraction)
     {
-        RaycastHit2D[] hitall = Physics2D.RaycastAll(transform.position, diraction.normalized, intellect.genom.DetectionRadius);
+        RaycastHit2D[] hitall = Physics2D.RaycastAll(transform.position, transform.TransformDirection(diraction.normalized), intellect.genom.DetectionRadius);
+        //Debug.DrawLine(transform.position, transform.position + transform.TransformDirection(new Vector3(diraction.normalized.x * intellect.genom.DetectionRadius, diraction.normalized.y * intellect.genom.DetectionRadius, 0)), Color.red);
         RaycastHit2D hit;
         if (hitall.Length >= 2)
             hit = hitall.ToList().First(x => x.collider != mycollider);
@@ -71,6 +94,7 @@ public class PerfectAmeba : MonoBehaviour
         if (hit.collider != null)
         {
             Vector2 vector = (hit.point - new Vector2(transform.position.x, transform.position.y)) / intellect.genom.DetectionRadius;
+            //Debug.Log("Vector: " + vector + " Dir: " + diraction + " Tag: " + hit.transform.gameObject.tag + " " + GetGradientFromTag(hit.transform.gameObject));
             information.Add(vector.x);
             information.Add(vector.y);
             information.Add(GetGradientFromTag(hit.transform.gameObject));
@@ -120,6 +144,8 @@ public class PerfectAmeba : MonoBehaviour
             return "Enemy";
         }
     }
+    #endregion
+    #region Collisions
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Food"))
@@ -152,4 +178,5 @@ public class PerfectAmeba : MonoBehaviour
             }
         }
     }
+    #endregion
 }

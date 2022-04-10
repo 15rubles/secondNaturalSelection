@@ -1,17 +1,41 @@
-using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
 public class AmebaWriterInFile
 {
-    public string DataPath = "C:/GitHub/secondNaturalSelection/secondNS";
-    public void WritePrfectIntellectInFile(PerfectIntellect intellect, string directorypath, string filename)
+    public void WritePrfectIntellectInFile(PerfectIntellect intellect, string FullDirectoryPath, string filename)
     {
-        File.WriteAllText(DataPath + "/Assets/AmebasIntellectsData/" + directorypath + "/" + filename + ".json", JsonUtility.ToJson(intellect));
+        string json = "";
+        json += JsonUtility.ToJson(intellect) + " ";
+        foreach (Neuron neuron in intellect.neurons)
+        {
+            json += JsonUtility.ToJson(neuron) + " ";
+        }
+        foreach (Gen gen in intellect.gens)
+        {
+            json += JsonUtility.ToJson(gen) + " ";
+        }
+        json += JsonUtility.ToJson(intellect.genom);
+        File.WriteAllText(FullDirectoryPath + "/" + filename + ".json", json);
     }
-    public PerfectIntellect ReadAllPrfectIntellectFromFile(string directorypath, string filename)
+    public PerfectIntellect ReadAllPrfectIntellectFromFile(string FullDirectoryPath, string filename)
     {
-        return JsonUtility.FromJson<PerfectIntellect>(File.ReadAllText(DataPath + "/Assets/AmebasIntellectsData/" + directorypath + "/" + filename + ".json"));
+        List<string> data = File.ReadAllText(FullDirectoryPath + "/" + filename).Split(' ').ToList();
+        PerfectIntellect perfectIntellect = JsonUtility.FromJson<PerfectIntellect>(data[0]);
+        perfectIntellect.neurons.Clear();
+        perfectIntellect.gens.Clear();
+        for (int i = 1; i < perfectIntellect.AllNeuronsCount; i++)
+        {
+            perfectIntellect.neurons.Add(JsonUtility.FromJson<Neuron>(data[i]));
+        }
+        for (int i = 1 + perfectIntellect.AllNeuronsCount; i < perfectIntellect.AllGensCount; i++)
+        {
+            perfectIntellect.gens.Add(JsonUtility.FromJson<Gen>(data[i]));
+        }
+        perfectIntellect.genom = JsonUtility.FromJson<Genom>(data[1 + perfectIntellect.AllNeuronsCount + perfectIntellect.AllGensCount]);
+        perfectIntellect.ReloadAfterBirth();
+        return perfectIntellect;
     }
 }
