@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PerfectIntellect
 {
+    public float LifeTime = 0;
     public float Energy = 2;
     public Genom genom;
     #region Private variebles
@@ -235,6 +236,10 @@ public class Genom
     }
     public void Mutate()
     {
+        if(Random.Range(0f, 1f) <= MutateChance * 4)
+        {
+            SecondName = Random.Range(0f, 100f);
+        }
         do
         {
             if (Random.Range(0f, 1f) <= MutateChance)

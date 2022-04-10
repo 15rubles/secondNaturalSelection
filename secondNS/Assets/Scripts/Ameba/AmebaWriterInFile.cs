@@ -1,18 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
-public class AmebaWriterInFile : MonoBehaviour
+public class AmebaWriterInFile
 {
-    // Start is called before the first frame update
-    void Start()
+    public string DataPath = "C:/GitHub/secondNaturalSelection/secondNS";
+    public void WritePrfectIntellectInFile(PerfectIntellect intellect, string directorypath, string filename)
     {
-        
+        File.WriteAllText(DataPath + "/Assets/AmebasIntellectsData/" + directorypath + "/" + filename + ".json", JsonUtility.ToJson(intellect));
     }
-
-    // Update is called once per frame
-    void Update()
+    public PerfectIntellect ReadAllPrfectIntellectFromFile(string directorypath, string filename)
     {
-        
+        return JsonUtility.FromJson<PerfectIntellect>(File.ReadAllText(DataPath + "/Assets/AmebasIntellectsData/" + directorypath + "/" + filename + ".json"));
     }
 }

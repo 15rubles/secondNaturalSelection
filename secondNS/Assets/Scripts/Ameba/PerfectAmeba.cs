@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class PerfectAmeba : MonoBehaviour
 {
-    [SerializeField]
-    float LifeTime = 0;
     // Own Parametrs
     public PerfectIntellect intellect;
     Rigidbody2D rb2d;
@@ -16,6 +14,7 @@ public class PerfectAmeba : MonoBehaviour
     GameObject child;
     PerfectAmeba supameba;
     PerfectIntellect intellectsup;
+    public AmebaGenerator amebaGenerator;
 
     private void Awake()
     {
@@ -29,7 +28,7 @@ public class PerfectAmeba : MonoBehaviour
     }
     void FixedUpdate()
     {
-        LifeTime += Time.fixedDeltaTime;
+        intellect.LifeTime += Time.fixedDeltaTime;
         // Energy for live
         intellect.Energy -= intellect.genom.EatFoodPerSecond * Time.fixedDeltaTime;
         // If energy is empty
@@ -41,6 +40,7 @@ public class PerfectAmeba : MonoBehaviour
             supameba = gameObject.GetComponent<PerfectAmeba>();
             supameba.intellect = new PerfectIntellect(intellect);
             supameba.intellect.Mutate();
+            amebaGenerator.AddAmebaInList(gameObject);
             intellect.Energy /= 2;
         }
         List<float> result = intellect.Think(GetInformation());
