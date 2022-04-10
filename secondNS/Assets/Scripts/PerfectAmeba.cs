@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,15 +10,18 @@ public class PerfectAmeba : MonoBehaviour
     // Own Parametrs
     public PerfectIntellect intellect;
     Rigidbody2D rb2d;
+    CapsuleCollider2D mycollider;
 
     // For sup
     GameObject child;
     PerfectAmeba supameba;
+    PerfectIntellect intellectsup;
 
     private void Awake()
     {
         child = (GameObject)Resources.Load("Ameba");
         rb2d = gameObject.GetComponent<Rigidbody2D>();
+        mycollider = gameObject.GetComponent<CapsuleCollider2D>();
     }
     private void Start()
     {
@@ -40,33 +44,38 @@ public class PerfectAmeba : MonoBehaviour
             intellect.Energy /= 2;
         }
         List<float> result = intellect.Think(GetInformation());
-        rb2d.velocity += new Vector2(result[0] * intellect.genom.Speed * (result[2] + 1) / 2, result[1] * intellect.genom.Speed * (result[2] + 1) / 2);
+        rb2d.velocity += new Vector2(result[0] * intellect.genom.Speed * (result[2] + 1) / 2, result[1] * intellect.genom.Speed * (result[2] + 1.2f) / 2);
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(new Vector3(0f, 0f, Mathf.Atan2(rb2d.velocity.y, rb2d.velocity.x) * Mathf.Rad2Deg - 90)), intellect.genom.RotateSpeed * Time.deltaTime);
     }
     List<float> GetInformation()
     {
         List<float> information = new List<float>();
-        AddInfoOnDiraction(information, new Vector3(0,1,0));
-        AddInfoOnDiraction(information, new Vector3(-1,1,0));
-        AddInfoOnDiraction(information, new Vector3(-1,0,0));
-        AddInfoOnDiraction(information, new Vector3(-1,-1,0));
-        AddInfoOnDiraction(information, new Vector3(0,-1,0));
-        AddInfoOnDiraction(information, new Vector3(1,-1,0));
-        AddInfoOnDiraction(information, new Vector3(0,0,0));
-        AddInfoOnDiraction(information, new Vector3(1,1,0));
+        AddInfoOnDiraction(information, new Vector2(0,1));
+        AddInfoOnDiraction(information, new Vector2(-1,1));
+        AddInfoOnDiraction(information, new Vector2(-1,0));
+        AddInfoOnDiraction(information, new Vector2(-1,-1));
+        AddInfoOnDiraction(information, new Vector2(0,-1));
+        AddInfoOnDiraction(information, new Vector2(1,-1));
+        AddInfoOnDiraction(information, new Vector2(0,0));
+        AddInfoOnDiraction(information, new Vector2(1,1));
         return information;
     }
     void AddInfoOnDiraction(List<float> information, Vector2 diraction)
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, diraction);
+        RaycastHit2D[] hitall = Physics2D.RaycastAll(transform.position, diraction.normalized, intellect.genom.DetectionRadius);
+        RaycastHit2D hit;
+        if (hitall.Length >= 2)
+            hit = hitall.ToList().First(x => x.collider != mycollider);
+        else
+            hit = new RaycastHit2D();
         if (hit.collider != null)
         {
             Vector2 vector = (hit.point - new Vector2(transform.position.x, transform.position.y)) / intellect.genom.DetectionRadius;
             information.Add(vector.x);
             information.Add(vector.y);
             information.Add(GetGradientFromTag(hit.transform.gameObject));
-            //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-            //Debug.Log("Did Hit");
+            //Debug.DrawRay(transform.position, transform.TransformDirection(new Vector3(diraction.x, diraction.y, 0)) * hit.distance, Color.yellow);
+            //Debug.Log("Did Hit " + hit.transform.gameObject.tag + " " + diraction);
         }
         else
         {
@@ -121,6 +130,30 @@ public class PerfectAmeba : MonoBehaviour
         {
             intellect.Energy += intellect.genom.AbsorbSkill;
             Destroy(collision.gameObject);
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ameba")
+        {
+            intellectsup = collision.gameObject.GetComponent<PerfectAmeba>().intellect;
+            if (intellectsup.genom.DefenceSkill < intellect.genom.AttackSkill && intellectsup.genom.SecondName != intellect.genom.SecondName)
+            {
+                intellectsup.Energy -= intellect.genom.AttackSkill * intellect.genom.AttackBiteCoeficient;
+                intellect.Energy += intellect.genom.AttackSkill;
+            }
+        }
+    }
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ameba")
+        {
+            intellectsup = collision.gameObject.GetComponent<PerfectAmeba>().intellect;
+            if (intellectsup.genom.DefenceSkill < intellect.genom.AttackSkill && intellectsup.genom.SecondName != intellect.genom.SecondName)
+            {
+                intellectsup.Energy -= intellect.genom.AttackSkill * intellect.genom.AttackSuckCoeficient;
+                intellect.Energy += intellect.genom.AttackSkill * intellect.genom.EatSuckCoeficient;
+            }
         }
     }
 }

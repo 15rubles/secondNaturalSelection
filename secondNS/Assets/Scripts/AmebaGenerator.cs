@@ -34,7 +34,7 @@ public class AmebaGenerator : MonoBehaviour
                 amebascount.Remove(amebascount[i]); i--; //size--;
             }
         }
-        if(amebascount.Count <= 3)
+        if(amebascount.Count <= 4)
         {
             for (int i = 0; i < StartCount; i++)
             {

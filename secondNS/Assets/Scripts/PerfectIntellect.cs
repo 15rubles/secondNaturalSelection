@@ -185,12 +185,17 @@ public class Genom
     public float AttackSkill;
     public float DefenceSkill;
 
+    // Attack coeficients
+    public float AttackBiteCoeficient = 1.25f;
+    public float AttackSuckCoeficient = 0.06f;
+    public float EatSuckCoeficient = 0.03f;
+
     // Скорость передвижения
     public float Speed = 0.05f;
     // Требуемое количество енергии для размножения
     public float EnergyForDublicate = 6;
     // Ежесекундное потребление енергии
-    public float EatFoodPerSecond = 0.1f;
+    public float EatFoodPerSecond = 0.2f;
     // Радиус обнаружения
     public float DetectionRadius = 7f;
     // Скорость поворота
