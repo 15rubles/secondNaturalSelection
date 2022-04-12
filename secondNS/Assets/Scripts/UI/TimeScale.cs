@@ -14,7 +14,7 @@ public class TimeScale : MonoBehaviour
     public void ChangeTimeScale()
     {
         float input = float.Parse(txt.text);
-        if(input > 0)
+        if(input >= 0)
             Time.timeScale = input;
     }
 }

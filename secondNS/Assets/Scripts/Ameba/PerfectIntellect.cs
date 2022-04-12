@@ -85,16 +85,24 @@ public class PerfectIntellect
     }
     public PerfectIntellect(PerfectIntellect parentintellect)
     {
-        neurons = parentintellect.neurons.GetRange(0, parentintellect.neurons.Count);
-        gens = parentintellect.gens.GetRange(0, parentintellect.gens.Count);
-        inputneurons = parentintellect.inputneurons.GetRange(0, parentintellect.inputneurons.Count);
-        outputneurons = parentintellect.outputneurons.GetRange(0, parentintellect.outputneurons.Count);
-        calculatequeue = parentintellect.calculatequeue.GetRange(0, parentintellect.calculatequeue.Count);
+        neurons = new List<Neuron>();
+        foreach (Neuron neuron in parentintellect.neurons)
+        {
+            neurons.Add(new Neuron(neuron));
+        }
+        gens = new List<Gen>();
+        foreach (Gen gen in parentintellect.gens)
+        {
+            gens.Add(new Gen(gen));
+            //gens.Last().BindToNeurons(neurons);
+        }
         AllNeuronsCount = parentintellect.AllNeuronsCount;
         AllGensCount = parentintellect.AllGensCount;
         InputNeuronsCount = parentintellect.InputNeuronsCount;
         OutputNeuronsCount = parentintellect.OutputNeuronsCount;
+        ReloadAfterBirth();
         genom = new Genom(parentintellect.genom);
+        FillCalculateQueue();
     }
     #endregion
     #region Public metods
@@ -143,6 +151,7 @@ public class PerfectIntellect
     public void ReloadAfterBirth()
     {
         inputneurons.Clear();
+        outputneurons.Clear();
         for (int i = 0; i < InputNeuronsCount; i++)
         {
             inputneurons.Add(neurons[i]);
@@ -244,11 +253,11 @@ public class Genom
     // Ежесекундное потребление енергии
     public float EatFoodPerSecond = 0.2f;
     // Радиус обнаружения
-    public float DetectionRadius = 7f;
+    public float DetectionRadius = 12f;
     // Скорость поворота
     public float RotateSpeed = 8f;
     // Максмум статов от абсолютного максимума
-    public float MaxAttibutes = 3f / 5f;
+    public float MaxAttibutes = 3.5f / 5f;
     #region Constants
     public float MutateChance = 0.005f;
     // Absorb borders
@@ -305,6 +314,10 @@ public class Neuron
     {
         this.Bias = Bias;
     }
+    public Neuron(Neuron neuron)
+    {
+        Bias = neuron.Bias;
+    }
     public void AddBias()
     {
         Container += Bias;
@@ -320,5 +333,16 @@ public class Gen
     public Gen(float Weight)
     {
         this.Weight = Weight;
+    }
+    public Gen(Gen gen)
+    {
+        ElementaryNeuronNumberInList = gen.ElementaryNeuronNumberInList;
+        FinitieNeuronNumberInList = gen.FinitieNeuronNumberInList;
+        Weight = gen.Weight;
+    }
+    public void BindToNeurons(List<Neuron> neurons)
+    {
+        ElementaryNeuron = neurons[ElementaryNeuronNumberInList];
+        FinitieNeuron = neurons[FinitieNeuronNumberInList];
     }
 }
