@@ -1,0 +1,24 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System.IO;
+
+public class GlobalInfo : MonoBehaviour
+{
+    [SerializeField]
+    public string MainDiractoryPath = "C:/GitHub/secondNaturalSelection/secondNS/Assets/AmebasIntellectsData";
+    [SerializeField]
+    public string EnviromentName = "StandartEnvironment";
+    [SerializeField]
+    public string GenerationFolder = "None";
+    [SerializeField]
+    public string GenerationName = "Free";
+    private void Awake()
+    {
+        GameObject.DontDestroyOnLoad(this.gameObject);
+        if (!Directory.Exists(MainDiractoryPath + "/UserSaves"))
+        {
+            Directory.CreateDirectory(MainDiractoryPath + "/UserSaves");
+        }
+    }
+}

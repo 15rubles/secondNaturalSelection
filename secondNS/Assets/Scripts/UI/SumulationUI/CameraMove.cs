@@ -11,7 +11,7 @@ public class CameraMove : MonoBehaviour
     const float maxScale = 50f;
     const float minScale = 1f;
     float defaultScale, scaleChange = 0;
-    float cameraMoveSpeed = 30f;
+    float cameraMoveSpeed = 60f;
     float scrollInput;
 
     void Start()
@@ -27,12 +27,12 @@ public class CameraMove : MonoBehaviour
             scaleChange -= scrollInput;
             cam.orthographicSize -= scrollInput;
         }
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
             startMousePosition = Input.mousePosition;
             startTransformPos = transform.position;
         }
-        if (!Input.GetMouseButton(0)) return;
+        if (!Input.GetMouseButton(1)) return;
         if (Input.mousePosition != startMousePosition)
         {
             Vector3 move = Camera.main.ScreenToViewportPoint(Input.mousePosition - startMousePosition);
