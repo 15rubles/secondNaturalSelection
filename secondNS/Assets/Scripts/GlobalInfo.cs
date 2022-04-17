@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
@@ -8,7 +8,7 @@ public class GlobalInfo : MonoBehaviour
     [SerializeField]
     public string MainDiractoryPath = "D:/Github repositories/secondNaturalSelection/secondNS/Assets/AmebasIntellectsData";
     [SerializeField]
-    public string EnviromentName = "StandartEnvironment";
+    public string EnviromentName = "Обычная";
     [SerializeField]
     public string GenerationFolder = "None";
     [SerializeField]
