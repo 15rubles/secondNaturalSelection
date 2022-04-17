@@ -2147,9 +2147,9 @@ MonoBehaviour:
   ExitButton: {fileID: 1755413369}
   ExitButtonPosition: {x: 1200, y: -320}
   SelectMapPanel: {fileID: 2054088262}
-  SelectMapPanelPosition: {x: 1578, y: -50}
+  SelectMapPanelPosition: {x: 1550, y: -120}
   BackMapButton: {fileID: 2021779152}
-  BackMapButtonPosition: {x: 1578, y: -438}
+  BackMapButtonPosition: {x: 1550, y: -450}
   BackMapButtonMouseEnter: {fileID: 2021779151}
 --- !u!114 &2021779154
 MonoBehaviour:
