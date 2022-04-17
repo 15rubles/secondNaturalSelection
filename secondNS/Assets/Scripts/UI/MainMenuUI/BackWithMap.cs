@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapButtonAnimation : MonoBehaviour
+public class BackWithMap : MonoBehaviour
 {
     [SerializeField]
     List<MoveOnMouseEnter> allbuttons;
@@ -10,20 +10,19 @@ public class MapButtonAnimation : MonoBehaviour
     [SerializeField]
     Moveble StartButton;
     [SerializeField]
-    Vector2 StartButtonHidePosition;
+    Vector2 StartButtonPosition;
     [SerializeField]
     Moveble PopulationButton;
     [SerializeField]
-    Vector2 PopulationButtonHidePosition;
-    [SerializeField]
-    Moveble ExitButton;
-    [SerializeField]
-    Vector2 ExitButtonHidePosition;
-
+    Vector2 PopulationButtonPosition;
     [SerializeField]
     Moveble MapButton;
     [SerializeField]
     Vector2 MapButtonPosition;
+    [SerializeField]
+    Moveble ExitButton;
+    [SerializeField]
+    Vector2 ExitButtonPosition;
 
     [SerializeField]
     Moveble SelectMapPanel;
@@ -40,11 +39,11 @@ public class MapButtonAnimation : MonoBehaviour
     {
         foreach (MoveOnMouseEnter btn in allbuttons)
         {
-            btn.enabled = false;
+            btn.enabled = true;
         }
-        StartButton.position = StartButtonHidePosition;
-        PopulationButton.position = PopulationButtonHidePosition;
-        ExitButton.position = ExitButtonHidePosition;
+        StartButton.position = StartButtonPosition;
+        PopulationButton.position = PopulationButtonPosition;
+        ExitButton.position = ExitButtonPosition;
         MapButton.position = MapButtonPosition;
         SelectMapPanel.position = SelectMapPanelPosition;
         BackMapButton.position = BackMapButtonPosition;

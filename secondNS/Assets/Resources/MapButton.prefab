@@ -187,10 +187,10 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
+    m_HighlightedSprite: {fileID: 21300000, guid: 647f1cfaee40320448592d24612f7557, type: 3}
     m_PressedSprite: {fileID: 21300000, guid: 05bd45d912add6f4287cff640ad8a911, type: 3}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 21300000, guid: 05bd45d912add6f4287cff640ad8a911, type: 3}
+    m_DisabledSprite: {fileID: 21300000, guid: 647f1cfaee40320448592d24612f7557, type: 3}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
@@ -226,8 +226,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffce1269b7f834246bb731d100742061, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NormalColor: {r: 0, g: 0, b: 0, a: 0}
-  SelectedColor: {r: 1, g: 1, b: 1, a: 0}
 --- !u!114 &8136990394255210941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,4 +238,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e717f863e3a0d9449a62e01b33616539, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mymap: {fileID: 0}
+  MapName: 
