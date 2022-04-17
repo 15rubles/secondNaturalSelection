@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class ChangeScene : MonoBehaviour
 {
     [SerializeField]
-    Text ChangeSceneText;
     GlobalInfo globalinfo;
     public void Awake()
     {
@@ -16,9 +15,5 @@ public class ChangeScene : MonoBehaviour
     public void Changescene()
     {
         SceneManager.LoadScene("ChangeEnviroment");
-    }
-    public void Update()
-    {
-        ChangeSceneText.text = "Current Scene: " + globalinfo.EnviromentName;
     }
 }

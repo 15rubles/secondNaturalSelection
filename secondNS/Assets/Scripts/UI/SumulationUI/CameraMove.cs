@@ -27,12 +27,12 @@ public class CameraMove : MonoBehaviour
             scaleChange -= scrollInput;
             cam.orthographicSize -= scrollInput;
         }
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(2))
         {
             startMousePosition = Input.mousePosition;
             startTransformPos = transform.position;
         }
-        if (!Input.GetMouseButton(1)) return;
+        if (!Input.GetMouseButton(2)) return;
         if (Input.mousePosition != startMousePosition)
         {
             Vector3 move = Camera.main.ScreenToViewportPoint(Input.mousePosition - startMousePosition);

@@ -6,17 +6,15 @@ public class ChangePopulation : MonoBehaviour
 {
     GlobalInfo globalinfo;
     [SerializeField]
-    Text CurrentPopulationText;
+    Animator anim;
     public void Awake()
     {
         globalinfo = GameObject.Find("GlobalInfo").GetComponent<GlobalInfo>();
+        anim = gameObject.GetComponent<Animator>();
     }
     public void ChangePopulationn()
     {
-        SceneManager.LoadScene("ChangePopulation");
-    }
-    public void Update()
-    {
-        CurrentPopulationText.text = "Current Population: " + globalinfo.GenerationName;
+        anim.SetBool("Menu", true);
+        //SceneManager.LoadScene("ChangePopulation");
     }
 }

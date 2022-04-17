@@ -6,7 +6,7 @@ using System.IO;
 public class GlobalInfo : MonoBehaviour
 {
     [SerializeField]
-    public string MainDiractoryPath = "C:/GitHub/secondNaturalSelection/secondNS/Assets/AmebasIntellectsData";
+    public string MainDiractoryPath = "D:/Github repositories/secondNaturalSelection/secondNS/Assets/AmebasIntellectsData";
     [SerializeField]
     public string EnviromentName = "StandartEnvironment";
     [SerializeField]
