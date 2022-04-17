@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class TimeScale : MonoBehaviour
 {
+    public float CurrentTimeScale = 1;
     Text txt;
     void Start()
     {
@@ -15,6 +16,6 @@ public class TimeScale : MonoBehaviour
     {
         float input = float.Parse(txt.text);
         if(input >= 0)
-            Time.timeScale = input;
+            CurrentTimeScale = input;
     }
 }
