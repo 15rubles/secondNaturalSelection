@@ -10,7 +10,7 @@ public class AmebaGenerator : MonoBehaviour
     float leftborder, rightborder, upborder, downborder;
     
     // Counters
-    int generation = 0;
+    int generation = 1;
     float time = 0;
 
     // Constants
@@ -32,8 +32,9 @@ public class AmebaGenerator : MonoBehaviour
     {
         globalInfo = GameObject.Find("GlobalInfo").GetComponent<GlobalInfo>();
         ameba = (GameObject)Resources.Load("Ameba");
-        diractory = "ProgramWork_" + System.DateTime.Now.Year + "_" + System.DateTime.Now.Month + "_" + System.DateTime.Now.Day + "_" + System.DateTime.Now.Hour + "_" + System.DateTime.Now.Minute + "_" + System.DateTime.Now.Second;
-        Directory.CreateDirectory(globalInfo.MainDiractoryPath + "/" + diractory);
+        diractory = "Population_" + globalInfo.NewGenerationNumber;
+        globalInfo.NewGenerationNumber++;
+        Directory.CreateDirectory(globalInfo.projectPath + "/" + diractory);
     }
     private void Start()
     {
@@ -57,10 +58,10 @@ public class AmebaGenerator : MonoBehaviour
         {
             int CountToDelete = AllAmebasInGeneration.Count;
             SortAmebasByLifetimes();
-            Directory.CreateDirectory(globalInfo.MainDiractoryPath + "/" + diractory + "/Generation_" + generation);
+            Directory.CreateDirectory(globalInfo.projectPath + "/" + diractory + "/Generation_" + generation);
             for (int i = 0; i < SafeToFileCount; i++)
             {
-                AWIF.WritePrfectIntellectInFile(AllAmebasInGeneration[i].intellect, globalInfo.MainDiractoryPath + "/" + diractory + "/Generation_" + generation, "Ameba" + i);
+                AWIF.WritePrfectIntellectInFile(AllAmebasInGeneration[i].intellect, globalInfo.projectPath + "/" + diractory + "/Generation_" + generation, "Ameba" + i);
             }
             for (int i = 0; i < StartCount * PartOfNewFromOld; i++)
             {

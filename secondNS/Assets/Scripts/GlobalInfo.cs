@@ -3,23 +3,15 @@ using System.IO;
 
 public class GlobalInfo : MonoBehaviour
 {
-    [SerializeField]
-    public string MainDiractoryPath = "D:/Github repositories/secondNaturalSelection/secondNS/Assets/AmebasIntellectsData";
-    [SerializeField]
+    public string projectPath;
     public string EnviromentName = "Default";
-    [SerializeField]
     public string GenerationFolder = "None";
-    [SerializeField]
-    public string GenerationName = "Free";
-
+    public int ChoosedGenerationNumber = 0;
+    public int NewGenerationNumber= 1;
     private void Awake()
     {
-        GameObject.DontDestroyOnLoad(this.gameObject);
-        if (!Directory.Exists(MainDiractoryPath + "/UserSaves"))
-        {
-            Directory.CreateDirectory(MainDiractoryPath + "/UserSaves");
-        }
-
+        projectPath = Application.dataPath + "/Resources/Data";
+        DontDestroyOnLoad(gameObject);
         GameObject empty = Resources.Load<GameObject>("Empty");
         GameObject map = Resources.Load<GameObject>("Enviroment/" + EnviromentName);
         GameObject env = Instantiate(empty);
