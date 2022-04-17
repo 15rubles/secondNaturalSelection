@@ -17,7 +17,7 @@ public class MapButtonsLoader : MonoBehaviour
         foreach (GameObject go in gameObjects)
         {
             GameObject gameObject = Instantiate(MapButton, transform);
-            gameObject.GetComponentInChildren<Text>().text = go.name;
+            gameObject.GetComponentInChildren<Text>().text = go.GetComponent<MapName>().RusMapName;
             gameObject.GetComponent<MapButtonClick>().MapName = go.name;
         }
     }
