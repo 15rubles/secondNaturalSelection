@@ -1,7 +1,8 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BackWithMap : MonoBehaviour
+public class BackWithPopulation : MonoBehaviour
 {
     [SerializeField]
     List<MoveOnMouseEnter> allbuttons;
@@ -24,16 +25,26 @@ public class BackWithMap : MonoBehaviour
     Vector2 ExitButtonPosition;
 
     [SerializeField]
-    Moveble SelectMapPanel;
+    Moveble DeletePopulationPanel;
     [SerializeField]
-    Vector2 SelectMapPanelPosition;
+    Vector2 DeletePopulationPanelPosition;
 
     [SerializeField]
-    Moveble BackMapButton;
+    Moveble SelectPopulationPanel;
     [SerializeField]
-    Vector2 BackMapButtonPosition;
+    Vector2 SelectPopulationPanelPosition;
+
     [SerializeField]
-    MoveOnMouseEnter BackMapButtonMouseEnter;
+    Moveble SelectGenerationPanel;
+    [SerializeField]
+    Vector2 SelectGenerationPanelPosition;
+
+    [SerializeField]
+    Moveble BackPopulationButton;
+    [SerializeField]
+    Vector2 BackPopulationButtonPosition;
+    [SerializeField]
+    MoveOnMouseEnter BackPopulationButtonMouseEnter;
     public void Click()
     {
         foreach (MoveOnMouseEnter btn in allbuttons)
@@ -44,8 +55,12 @@ public class BackWithMap : MonoBehaviour
         PopulationButton.position = PopulationButtonPosition;
         ExitButton.position = ExitButtonPosition;
         MapButton.position = MapButtonPosition;
-        SelectMapPanel.position = SelectMapPanelPosition;
-        BackMapButton.position = BackMapButtonPosition;
-        BackMapButtonMouseEnter.enabled = false;
+
+        DeletePopulationPanel.position = DeletePopulationPanelPosition;
+        SelectPopulationPanel.position = SelectPopulationPanelPosition;
+        SelectGenerationPanel.position = SelectGenerationPanelPosition;
+
+        BackPopulationButton.position = BackPopulationButtonPosition;
+        BackPopulationButtonMouseEnter.enabled = false;
     }
 }

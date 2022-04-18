@@ -1,20 +1,65 @@
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class ChangePopulation : MonoBehaviour
 {
-    GlobalInfo globalinfo;
     [SerializeField]
-    Animator anim;
-    public void Awake()
+    List<MoveOnMouseEnter> allbuttons;
+
+    [SerializeField]
+    Moveble StartButton;
+    [SerializeField]
+    Vector2 StartButtonHidePosition;
+    [SerializeField]
+    Moveble PopulationButton;
+    [SerializeField]
+    Vector2 PopulationButtonHidePosition;
+    [SerializeField]
+    Moveble MapButton;
+    [SerializeField]
+    Vector2 MapButtonHidePosition;
+    [SerializeField]
+    Moveble ExitButton;
+    [SerializeField]
+    Vector2 ExitButtonHidePosition;
+
+    [SerializeField]
+    Moveble DeletePopulationPanel;
+    [SerializeField]
+    Vector2 DeletePopulationPanelPosition;
+
+    [SerializeField]
+    Moveble SelectPopulationPanel;
+    [SerializeField]
+    Vector2 SelectPopulationPanelPosition;
+
+    [SerializeField]
+    Moveble SelectGenerationPanel;
+    [SerializeField]
+    Vector2 SelectGenerationPanelPosition;
+
+    [SerializeField]
+    Moveble BackPopulationButton;
+    [SerializeField]
+    Vector2 BackPopulationButtonPosition;
+    [SerializeField]
+    MoveOnMouseEnter BackPopulationButtonMouseEnter;
+    public void Click()
     {
-        globalinfo = GameObject.Find("GlobalInfo").GetComponent<GlobalInfo>();
-        anim = gameObject.GetComponent<Animator>();
-    }
-    public void ChangePopulationn()
-    {
-        anim.SetBool("Menu", true);
-        //SceneManager.LoadScene("ChangePopulation");
+        foreach (MoveOnMouseEnter btn in allbuttons)
+        {
+            btn.enabled = false;
+        }
+        StartButton.position = StartButtonHidePosition;
+        PopulationButton.position = PopulationButtonHidePosition;
+        ExitButton.position = ExitButtonHidePosition;
+        MapButton.position = MapButtonHidePosition;
+
+        DeletePopulationPanel.position = DeletePopulationPanelPosition;
+        SelectPopulationPanel.position = SelectPopulationPanelPosition;
+        SelectGenerationPanel.position = SelectGenerationPanelPosition;
+
+        BackPopulationButton.position = BackPopulationButtonPosition;
+        BackPopulationButtonMouseEnter.enabled = true;
     }
 }
