@@ -22,6 +22,6 @@ public class SliderGeneration : MonoBehaviour
     public void OnValueChanged()
     {
         globalInfo.ChoosedGenerationNumber = (int)slider.value;
-        text.text = "Популяция " + Convert.ToString(slider.value);
+        text.text = "Генерация " + Convert.ToString(slider.value);
     }
 }

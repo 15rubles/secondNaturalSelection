@@ -213,8 +213,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FolderName: 
-  DeletePanelPosition: {x: 550, y: 20}
-  ChooseGenerationPanelPosition: {x: -350, y: -250}
+  DeletePanelPosition: {x: 730, y: 73}
+  ChooseGenerationPanelPosition: {x: -350, y: -206}
 --- !u!1 &428767716607738633
 GameObject:
   m_ObjectHideFlags: 0
