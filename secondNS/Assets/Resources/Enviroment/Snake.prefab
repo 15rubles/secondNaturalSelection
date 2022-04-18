@@ -926,6 +926,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RusMapName: "\u0417\u043C\u0435\u0439\u043A\u0430"
+  Size: {x: 71, y: 40}
 --- !u!1 &3333977394429223859
 GameObject:
   m_ObjectHideFlags: 0

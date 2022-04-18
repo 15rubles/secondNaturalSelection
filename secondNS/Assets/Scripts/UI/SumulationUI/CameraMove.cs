@@ -8,10 +8,11 @@ public class CameraMove : MonoBehaviour
     float lerpSpeed = 2f;
     public Vector3 movePos, movePlusTransform;
     Camera cam;
-    const float maxScale = 50f;
+    const float maxScale = 200f;
     const float minScale = 1f;
     float defaultScale, scaleChange = 0;
-    float cameraMoveSpeed = 60f;
+    float cameraMoveSpeed = 120f;
+    float zoomSpeed = 5f;
     float scrollInput;
 
     void Start()
@@ -24,15 +25,25 @@ public class CameraMove : MonoBehaviour
         scrollInput = Input.mouseScrollDelta.y;
         if ((scrollInput < 0 && cam.orthographicSize < maxScale) || (scrollInput > 0 && cam.orthographicSize > minScale))
         {
-            scaleChange -= scrollInput;
-            cam.orthographicSize -= scrollInput;
+            scaleChange -= scrollInput * zoomSpeed;
+            cam.orthographicSize -= scrollInput * zoomSpeed;
         }
-        if (Input.GetMouseButtonDown(2))
+        if(cam.orthographicSize < minScale)
+        {
+            cam.orthographicSize = minScale;
+            scaleChange = minScale - defaultScale;
+        }
+        if(cam.orthographicSize > maxScale)
+        {
+            cam.orthographicSize = maxScale;
+            scaleChange = maxScale - defaultScale;
+        }
+        if (Input.GetMouseButtonDown(0))
         {
             startMousePosition = Input.mousePosition;
             startTransformPos = transform.position;
         }
-        if (!Input.GetMouseButton(2)) return;
+        if (!Input.GetMouseButton(0)) return;
         if (Input.mousePosition != startMousePosition)
         {
             Vector3 move = Camera.main.ScreenToViewportPoint(Input.mousePosition - startMousePosition);
