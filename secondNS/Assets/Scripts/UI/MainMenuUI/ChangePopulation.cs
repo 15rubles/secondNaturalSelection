@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class ChangePopulation : MonoBehaviour
 {
+    public bool ispressed = false;
+
     [SerializeField]
     List<MoveOnMouseEnter> allbuttons;
 
@@ -46,6 +48,7 @@ public class ChangePopulation : MonoBehaviour
     MoveOnMouseEnter BackPopulationButtonMouseEnter;
     public void Click()
     {
+        ispressed = true;
         foreach (MoveOnMouseEnter btn in allbuttons)
         {
             btn.enabled = false;

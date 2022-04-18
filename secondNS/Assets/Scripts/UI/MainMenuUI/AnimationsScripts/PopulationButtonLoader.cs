@@ -31,14 +31,14 @@ public class PopulationButtonLoader : MonoBehaviour
         foreach (string name in directories)
         {
             GameObject gameObject = Instantiate(PopulationToggle, transform);
-            gameObject.GetComponentInChildren<Text>().text = "Поп. " + name.Split('_')[1];
+            gameObject.GetComponentInChildren<Text>().text = "Поп. " + name.Split('_').ToList().Last();
             alltoggles.Add(gameObject.GetComponent<Toggle>());
             alltoggles.Last().group = MyToggleGroup;
             if (globalInfo.GenerationFolder == name)
             {
                 alltoggles.Last().isOn = true;
             }
-            gameObject.GetComponent<PopulationButtonClick>().FolderName = name;
+            gameObject.GetComponent<PopulationButtonClick>().FolderName = "Population_" + name.Split('_').ToList().Last();
         }
     }
 }

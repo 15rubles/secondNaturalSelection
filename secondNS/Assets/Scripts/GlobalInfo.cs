@@ -6,7 +6,7 @@ public class GlobalInfo : MonoBehaviour
     public string projectPath;
     public string EnviromentName = "Default";
     public string GenerationFolder = "None";
-    public int ChoosedGenerationNumber = 0;
+    public int ChoosedGenerationNumber = 1;
     public int NewGenerationNumber= 1;
     private void Awake()
     {

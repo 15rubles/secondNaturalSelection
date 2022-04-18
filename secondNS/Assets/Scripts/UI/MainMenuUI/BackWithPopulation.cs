@@ -6,6 +6,8 @@ public class BackWithPopulation : MonoBehaviour
 {
     [SerializeField]
     List<MoveOnMouseEnter> allbuttons;
+    [SerializeField]
+    ChangePopulation chpop;
 
     [SerializeField]
     Moveble StartButton;
@@ -47,6 +49,7 @@ public class BackWithPopulation : MonoBehaviour
     MoveOnMouseEnter BackPopulationButtonMouseEnter;
     public void Click()
     {
+        chpop.ispressed = false;
         foreach (MoveOnMouseEnter btn in allbuttons)
         {
             btn.enabled = true;
