@@ -11,8 +11,8 @@ public class CameraMove : MonoBehaviour
     const float maxScale = 200f;
     const float minScale = 1f;
     float defaultScale, scaleChange = 0;
-    float cameraMoveSpeed = 120f;
-    float zoomSpeed = 5f;
+    float cameraMoveSpeed = 200f;
+    float zoomSpeed = 3f;
     float scrollInput;
 
     void Start()

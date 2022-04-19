@@ -15,8 +15,8 @@ public class AmebaGenerator : MonoBehaviour
     float time = 0;
 
     // Constants
-    int StartCount = 40;
-    float generationtime = 360;
+    int StartCount = 30;
+    float generationtime = 240;
     float PartOfNewFromOld = 0.3f;
     int SafeToFileCount = 6;
 
@@ -56,6 +56,7 @@ public class AmebaGenerator : MonoBehaviour
                 CreateNewAmeba();
             }
         }
+        SaveCurrentAmebasGeneration();
     }
     private void FixedUpdate()
     {

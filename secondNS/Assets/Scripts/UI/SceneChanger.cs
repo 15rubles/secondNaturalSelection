@@ -34,7 +34,7 @@ public class SceneChanger : MonoBehaviour
     {
         if (hiding)
         {
-            time += Time.deltaTime;
+            time += Time.unscaledDeltaTime;
             hider.color = new Color(hider.color.r, hider.color.g, hider.color.b, time/ hidetime);
             if (time >= hidetime)
             {
@@ -47,7 +47,7 @@ public class SceneChanger : MonoBehaviour
         }
         if (opening)
         {
-            time += Time.deltaTime;
+            time += Time.unscaledDeltaTime;
             hider.color = new Color(hider.color.r, hider.color.g, hider.color.b, Mathf.Abs(1 - time / hidetime));
             if (time - opentime >= 0)
             {
