@@ -12,6 +12,17 @@ public class GlobalInfo : MonoBehaviour
     public int NewGenerationNumber= 1;
     private void Awake()
     {
+        int count = FindObjectsOfType<GlobalInfo>().Length;
+        if (count != 1)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+
         if (File.Exists(Application.dataPath + "/Resources/Globalinfo.json"))
         {
             //filename = "Ameba" + filename.Split('a').ToList().Last();
@@ -28,13 +39,17 @@ public class GlobalInfo : MonoBehaviour
         }
         projectPath = Application.dataPath + "/Resources/Data";
         DontDestroyOnLoad(gameObject);
+        SpawnScene();
+    }
+    public void SpawnScene()
+    {
+        Destroy(GameObject.Find("Enviroment"));
         GameObject empty = Resources.Load<GameObject>("Empty");
         GameObject map = Resources.Load<GameObject>("Enviroment/" + EnviromentName);
         GameObject env = Instantiate(empty);
         env.name = "Enviroment";
         Instantiate(map, env.transform);
     }
-
     void OnApplicationQuit()
     {
         ConvertData cd = new ConvertData();

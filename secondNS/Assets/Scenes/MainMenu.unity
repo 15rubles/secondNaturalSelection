@@ -1627,7 +1627,7 @@ MonoBehaviour:
   projectPath: 
   EnviromentName: Default
   GenerationFolder: None
-  ChoosedGenerationNumber: 0
+  ChoosedGenerationNumber: 1
   NewGenerationNumber: 1
 --- !u!4 &819109967
 Transform:

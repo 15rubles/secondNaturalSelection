@@ -20,6 +20,17 @@ public class SceneChanger : MonoBehaviour
     float time = 0;
     private void Awake()
     {
+        int count = FindObjectsOfType<SceneChanger>().Length;
+        if (count != 1)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+
         DontDestroyOnLoad(gameObject);
         lockpanel = Resources.Load<GameObject>("Panel");
         hider = GetComponentInChildren<SpriteRenderer>();

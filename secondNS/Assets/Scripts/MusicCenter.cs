@@ -7,6 +7,17 @@ public class MusicCenter : MonoBehaviour
     AudioSource source;
     void Awake()
     {
+        int count = FindObjectsOfType<MusicCenter>().Length;
+        if (count != 1)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        else
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+
         playlist = Resources.LoadAll<AudioClip>("Music");
         source = gameObject.GetComponent<AudioSource>();
         source.clip = playlist[0];

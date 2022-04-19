@@ -20,5 +20,6 @@ public class MapButtonsLoader : MonoBehaviour
             gameObject.GetComponentInChildren<Text>().text = go.GetComponent<MapName>().RusMapName;
             gameObject.GetComponent<MapButtonClick>().MapName = go.name;
         }
+        GameObject.Find("GlobalInfo").GetComponent<GlobalInfo>().SpawnScene();
     }
 }
