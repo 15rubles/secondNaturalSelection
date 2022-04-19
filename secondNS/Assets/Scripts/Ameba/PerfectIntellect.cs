@@ -94,7 +94,6 @@ public class PerfectIntellect
         foreach (Gen gen in parentintellect.gens)
         {
             gens.Add(new Gen(gen));
-            //gens.Last().BindToNeurons(neurons);
         }
         AllNeuronsCount = parentintellect.AllNeuronsCount;
         AllGensCount = parentintellect.AllGensCount;
@@ -102,7 +101,6 @@ public class PerfectIntellect
         OutputNeuronsCount = parentintellect.OutputNeuronsCount;
         ReloadAfterBirth();
         genom = new Genom(parentintellect.genom);
-        FillCalculateQueue();
     }
     #endregion
     #region Public metods

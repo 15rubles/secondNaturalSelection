@@ -27,11 +27,11 @@ public class AmebaWriterInFile
         PerfectIntellect perfectIntellect = JsonUtility.FromJson<PerfectIntellect>(data[0]);
         perfectIntellect.neurons = new List<Neuron>();
         perfectIntellect.gens = new List<Gen>();
-        for (int i = 1; i < perfectIntellect.AllNeuronsCount; i++)
+        for (int i = 1; i < perfectIntellect.AllNeuronsCount + 1; i++)
         {
             perfectIntellect.neurons.Add(JsonUtility.FromJson<Neuron>(data[i]));
         }
-        for (int i = 1 + perfectIntellect.AllNeuronsCount; i < perfectIntellect.AllGensCount; i++)
+        for (int i = 1 + perfectIntellect.AllNeuronsCount; i < 1 + perfectIntellect.AllNeuronsCount + perfectIntellect.AllGensCount; i++)
         {
             perfectIntellect.gens.Add(JsonUtility.FromJson<Gen>(data[i]));
         }
