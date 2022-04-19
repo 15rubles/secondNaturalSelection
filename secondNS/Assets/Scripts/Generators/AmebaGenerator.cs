@@ -16,7 +16,7 @@ public class AmebaGenerator : MonoBehaviour
 
     // Constants
     int StartCount = 30;
-    float generationtime = 240;
+    float generationtime = 420;
     float PartOfNewFromOld = 0.3f;
     int SafeToFileCount = 6;
 

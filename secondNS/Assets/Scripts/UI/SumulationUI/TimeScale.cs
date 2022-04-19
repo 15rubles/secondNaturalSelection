@@ -16,6 +16,6 @@ public class TimeScale : MonoBehaviour
     public void UpdateTimescale(bool activate)
     {
         if(activate) Time.timeScale = timescale;
-        text.text = "X" + Convert.ToString(timescale);
+        text.text = "x" + Convert.ToString(timescale);
     }
 }
