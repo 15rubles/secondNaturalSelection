@@ -675,6 +675,7 @@ MonoBehaviour:
   LogoPosition: {x: -341, y: -166}
   moveOn: {fileID: 457492556}
   moveOnContinue: {fileID: 1169670929}
+  isclicked: 0
 --- !u!114 &457492556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1464,6 +1465,7 @@ MonoBehaviour:
   timeScale: {fileID: 2130513157}
   moveOn: {fileID: 1169670929}
   moveOnPause: {fileID: 457492556}
+  ppause: {fileID: 457492555}
 --- !u!114 &1169670926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1754,6 +1756,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeScale: {fileID: 2130513157}
   change: 0.5
+  pause: {fileID: 457492555}
 --- !u!1 &1245185260
 GameObject:
   m_ObjectHideFlags: 0
@@ -2093,6 +2096,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeScale: {fileID: 2130513157}
   change: -0.5
+  pause: {fileID: 457492555}
 --- !u!1 &1347824035
 GameObject:
   m_ObjectHideFlags: 0

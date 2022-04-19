@@ -6,12 +6,14 @@ public class ArrowMinus : MonoBehaviour
     TimeScale timeScale;
     [SerializeField]
     float change = -0.5f;
+    [SerializeField]
+    Pause pause;
     public void Click()
     {
         if(timeScale.timescale >= 0.5f)
         {
             timeScale.timescale += change;
-            timeScale.UpdateTimescale();
+            timeScale.UpdateTimescale(!pause.isclicked);
         }
     }
 }

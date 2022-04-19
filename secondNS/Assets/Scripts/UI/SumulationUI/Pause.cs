@@ -42,8 +42,11 @@ public class Pause : MonoBehaviour
 
     [SerializeField]
     MoveOnMouseEnter moveOnContinue;
+
+    public bool isclicked = false;
     public void Click()
     {
+        isclicked = true;
         Time.timeScale = 0;
         Hide.position = HideHidePosition;
         pause.position = PauseHidePosition;

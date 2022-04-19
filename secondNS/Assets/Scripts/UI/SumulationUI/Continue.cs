@@ -47,9 +47,13 @@ public class Continue : MonoBehaviour
 
     [SerializeField]
     MoveOnMouseEnter moveOnPause;
+
+    [SerializeField]
+    Pause ppause;
     public void Click()
     {
-        timeScale.UpdateTimescale();
+        ppause.isclicked = false;
+        timeScale.UpdateTimescale(true);
         Hide.position = HidePosition;
         pause.position = PausePosition;
         Ccontinue.position = ContinueHidePosition;

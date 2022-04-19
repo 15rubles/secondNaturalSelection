@@ -11,11 +11,11 @@ public class TimeScale : MonoBehaviour
     public void Start()
     {
         text = GetComponent<Text>();
-        UpdateTimescale();
+        UpdateTimescale(true);
     }
-    public void UpdateTimescale()
+    public void UpdateTimescale(bool activate)
     {
-        Time.timeScale = timescale;
+        if(activate) Time.timeScale = timescale;
         text.text = "X" + Convert.ToString(timescale);
     }
 }
