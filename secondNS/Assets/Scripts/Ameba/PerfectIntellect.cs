@@ -15,9 +15,9 @@ public class PerfectIntellect
     #region Private variebles
     public List<Neuron> neurons = new List<Neuron>();
     public List<Gen> gens = new List<Gen>();
-    readonly public List<Neuron> inputneurons = new List<Neuron>();
-    readonly public List<Neuron> outputneurons = new List<Neuron>();
-    readonly public List<Neuron> calculatequeue = new List<Neuron>();
+    public List<Neuron> inputneurons = new List<Neuron>();
+    public List<Neuron> outputneurons = new List<Neuron>();
+    public List<Neuron> calculatequeue = new List<Neuron>();
     #endregion
     #region Constants
     // Gen borders
@@ -150,8 +150,9 @@ public class PerfectIntellect
     }
     public void ReloadAfterBirth()
     {
-        inputneurons.Clear();
-        outputneurons.Clear();
+        inputneurons = new List<Neuron>();
+        outputneurons = new List<Neuron>();
+        calculatequeue = new List<Neuron>();
         for (int i = 0; i < InputNeuronsCount; i++)
         {
             inputneurons.Add(neurons[i]);

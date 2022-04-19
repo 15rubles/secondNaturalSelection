@@ -22,10 +22,11 @@ public class AmebaWriterInFile
     }
     public PerfectIntellect ReadAllPrfectIntellectFromFile(string FullDirectoryPath, string filename)
     {
+        filename = "Ameba" + filename.Split('a').ToList().Last();
         List<string> data = File.ReadAllText(FullDirectoryPath + "/" + filename).Split(' ').ToList();
         PerfectIntellect perfectIntellect = JsonUtility.FromJson<PerfectIntellect>(data[0]);
-        perfectIntellect.neurons.Clear();
-        perfectIntellect.gens.Clear();
+        perfectIntellect.neurons = new List<Neuron>();
+        perfectIntellect.gens = new List<Gen>();
         for (int i = 1; i < perfectIntellect.AllNeuronsCount; i++)
         {
             perfectIntellect.neurons.Add(JsonUtility.FromJson<Neuron>(data[i]));

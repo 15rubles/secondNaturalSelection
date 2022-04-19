@@ -41,6 +41,9 @@ public class Hider : MonoBehaviour
     Vector2 PauseHidePosition;
     [SerializeField]
     Vector2 PauseNormalPosition;
+
+    [SerializeField]
+    Image image;
     public void Start()
     {
         toggle = GetComponent<Toggle>();
@@ -49,6 +52,7 @@ public class Hider : MonoBehaviour
     {
         if (toggle.isOn)
         {
+            image.enabled = false;
             Timer.position = TimerNormalPosition;
             TimeScale.position = TimeScaleNormalPosition;
             LeftArrow.position = LeftArrowNormalPosition;
@@ -57,6 +61,7 @@ public class Hider : MonoBehaviour
         }
         else
         {
+            image.enabled = true;
             Timer.position = TimerHidePosition;
             TimeScale.position = TimeScaleHidePosition;
             LeftArrow.position = LeftArrowHidePosition;
