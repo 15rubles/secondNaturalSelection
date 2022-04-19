@@ -831,6 +831,7 @@ MonoBehaviour:
   Pause: {fileID: 457492554}
   PauseHidePosition: {x: 1532, y: -180}
   PauseNormalPosition: {x: 1340, y: -180}
+  image: {fileID: 1793586480}
 --- !u!114 &467976540
 MonoBehaviour:
   m_ObjectHideFlags: 0

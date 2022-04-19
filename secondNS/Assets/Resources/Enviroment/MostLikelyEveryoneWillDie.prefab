@@ -1739,7 +1739,7 @@ GameObject:
   - component: {fileID: 3333977393984230132}
   - component: {fileID: 762632483951692051}
   m_Layer: 0
-  m_Name: Most likely everyone will die ;)
+  m_Name: MostLikelyEveryoneWillDie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

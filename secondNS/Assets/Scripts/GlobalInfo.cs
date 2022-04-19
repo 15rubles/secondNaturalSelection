@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 public class GlobalInfo : MonoBehaviour
 {
@@ -12,7 +14,13 @@ public class GlobalInfo : MonoBehaviour
     {
         if (File.Exists(Application.dataPath + "/Resources/Globalinfo.json"))
         {
-            GlobalInfo info = JsonUtility.FromJson<GlobalInfo>(File.ReadAllText(Application.dataPath + "/Resources/Globalinfo.json"));
+            //filename = "Ameba" + filename.Split('a').ToList().Last();
+            //List<string> data = File.ReadAllText(FullDirectoryPath + "/" + filename).Split(' ').ToList();
+            //PerfectIntellect perfectIntellect = JsonUtility.FromJson<PerfectIntellect>(data[0]);
+
+            string a = Application.dataPath + "/Resources/Globalinfo.json";
+            List<string> js = File.ReadAllText(a).Split(' ').ToList();
+            ConvertData info = JsonUtility.FromJson<ConvertData>(js[0]);
             EnviromentName = info.EnviromentName;
             GenerationFolder = info.GenerationFolder;
             ChoosedGenerationNumber = info.ChoosedGenerationNumber;
@@ -29,7 +37,20 @@ public class GlobalInfo : MonoBehaviour
 
     void OnApplicationQuit()
     {
-        string json = JsonUtility.ToJson(this);
+        ConvertData cd = new ConvertData();
+        cd.EnviromentName = EnviromentName;
+        cd.GenerationFolder = GenerationFolder;
+        cd.ChoosedGenerationNumber = ChoosedGenerationNumber;
+        cd.NewGenerationNumber = NewGenerationNumber;
+        string json = JsonUtility.ToJson(cd);
         File.WriteAllText(Application.dataPath + "/Resources/Globalinfo.json", json);
     }
+}
+
+public class ConvertData
+{
+    public string EnviromentName = "Default";
+    public string GenerationFolder = "None";
+    public int ChoosedGenerationNumber = 1;
+    public int NewGenerationNumber = 1;
 }
