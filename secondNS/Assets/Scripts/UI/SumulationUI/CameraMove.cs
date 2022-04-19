@@ -6,13 +6,12 @@ public class CameraMove : MonoBehaviour
 {
     Vector3 startMousePosition, startTransformPos;
     float lerpSpeed = 2f;
-    public Vector3 movePos, movePlusTransform;
     Camera cam;
     const float maxScale = 200f;
     const float minScale = 1f;
     float defaultScale, scaleChange = 0;
-    float cameraMoveSpeed = 200f;
-    float zoomSpeed = 3f;
+    float cameraMoveSpeed = 400f;
+    float zoomSpeed = 2f;
     float scrollInput;
 
     void Start()

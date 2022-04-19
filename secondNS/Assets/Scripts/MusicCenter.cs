@@ -10,6 +10,7 @@ public class MusicCenter : MonoBehaviour
         playlist = Resources.LoadAll<AudioClip>("Music");
         source = gameObject.GetComponent<AudioSource>();
         source.clip = playlist[0];
+        DontDestroyOnLoad(gameObject);
     }
 
     void Start()

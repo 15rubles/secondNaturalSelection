@@ -8,7 +8,7 @@ public class FoodGenerator : MonoBehaviour
     [SerializeField]
     readonly int MaxCount = 1500;
     [SerializeField]
-    readonly float timedelay = 0.015f;
+    readonly float timedelay = 0.15f;
     [SerializeField]
     private float timer = 0;
 

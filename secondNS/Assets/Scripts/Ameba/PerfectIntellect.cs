@@ -243,7 +243,7 @@ public class Genom
 
     // Attack coeficients
     public float AttackBiteCoeficient = 1.25f;
-    public float AttackSuckCoeficient = 0.06f;
+    public float AttackSuckCoeficient = 0.0375f;
     public float EatSuckCoeficient = 0.03f;
 
     // Скорость передвижения
@@ -259,7 +259,7 @@ public class Genom
     // Максмум статов от абсолютного максимума
     public float MaxAttibutes = 3.5f / 5f;
     #region Constants
-    public float MutateChance = 0.005f;
+    public float MutateChance = 0.01f;
     // Absorb borders
     public const float LeftAbsorbBorder = 0.2f;
     public const float RightAbsorbBorder = 1f;
