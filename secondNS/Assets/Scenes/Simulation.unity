@@ -162,7 +162,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 1199.9998, y: -350}
+  m_AnchoredPosition: {x: 1712, y: -350}
   m_SizeDelta: {x: 1494, y: 106}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &94771394
@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startpoint: {x: 1200, y: -350}
-  moveto: {x: 1060, y: -350}
+  moveto: {x: 1020, y: -350}
 --- !u!114 &94771395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,7 +192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 4
-  position: {x: 1200, y: -350}
+  position: {x: 1712, y: -350}
 --- !u!114 &94771396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -510,6 +510,7 @@ GameObject:
   - component: {fileID: 457492552}
   - component: {fileID: 457492551}
   - component: {fileID: 457492554}
+  - component: {fileID: 457492556}
   - component: {fileID: 457492555}
   m_Layer: 5
   m_Name: Pause
@@ -659,19 +660,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Hide: {fileID: 467976537}
-  HideHidePosition: {x: 0, y: 0}
+  HideHidePosition: {x: 1532, y: -50}
   pause: {fileID: 457492554}
-  PauseHidePosition: {x: 0, y: 0}
+  PauseHidePosition: {x: 1532, y: -180}
   Continue: {fileID: 1169670924}
-  ContinuePosition: {x: 0, y: 0}
+  ContinuePosition: {x: 1020, y: 100}
   Restart: {fileID: 1245185263}
-  RestartPosition: {x: 0, y: 0}
+  RestartPosition: {x: 1020, y: -50}
   BackToMenu: {fileID: 840133426}
-  BackToMenuPosition: {x: 0, y: 0}
+  BackToMenuPosition: {x: 1020, y: -200}
   Exit: {fileID: 94771395}
-  ExitPosition: {x: 0, y: 0}
+  ExitPosition: {x: 1200, y: -350}
   Logo: {fileID: 159989135}
-  LogoPosition: {x: 0, y: 0}
+  LogoPosition: {x: -341, y: -166}
+  moveOn: {fileID: 457492556}
+  moveOnContinue: {fileID: 1169670929}
+--- !u!114 &457492556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 457492549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d29fa7bf76a15e54099b14c7cfcc44f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startpoint: {x: 1340, y: -180}
+  moveto: {x: 1300, y: -180}
 --- !u!1 &467976535
 GameObject:
   m_ObjectHideFlags: 0
@@ -683,6 +700,7 @@ GameObject:
   - component: {fileID: 467976536}
   - component: {fileID: 467976538}
   - component: {fileID: 467976537}
+  - component: {fileID: 467976540}
   - component: {fileID: 467976539}
   m_Layer: 5
   m_Name: Hider
@@ -798,20 +816,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Timer: {fileID: 327217052}
-  TimerHidePosition: {x: 0, y: 0}
-  TimerNormalPosition: {x: 0, y: 0}
+  TimerHidePosition: {x: -282, y: -50}
+  TimerNormalPosition: {x: 55, y: -50}
   TimeScale: {fileID: 2130513156}
-  TimeScaleHidePosition: {x: 0, y: 0}
-  TimeScaleNormalPosition: {x: 0, y: 0}
+  TimeScaleHidePosition: {x: -222, y: -140}
+  TimeScaleNormalPosition: {x: 115, y: -140}
   LeftArrow: {fileID: 1256398273}
-  LeftArrowHidePosition: {x: 0, y: 0}
-  LeftArrowNormalPosition: {x: 0, y: 0}
+  LeftArrowHidePosition: {x: -252, y: -200}
+  LeftArrowNormalPosition: {x: 80, y: -200}
   RightArrow: {fileID: 1189960018}
-  RightArrowHidePosition: {x: 0, y: 0}
-  RightArrowNormalPosition: {x: 0, y: 0}
+  RightArrowHidePosition: {x: -77, y: -200}
+  RightArrowNormalPosition: {x: 260, y: -200}
   Pause: {fileID: 457492554}
-  PauseHidePosition: {x: 0, y: 0}
-  PauseNormalPosition: {x: 0, y: 0}
+  PauseHidePosition: {x: 1532, y: -180}
+  PauseNormalPosition: {x: 1340, y: -180}
+--- !u!114 &467976540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 467976535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d29fa7bf76a15e54099b14c7cfcc44f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startpoint: {x: 1340, y: -50}
+  moveto: {x: 1300, y: -50}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -993,7 +1025,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 1020, y: -200}
+  m_AnchoredPosition: {x: 1532.0002, y: -200}
   m_SizeDelta: {x: 1494, y: 106}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &840133425
@@ -1023,7 +1055,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 4
-  position: {x: 1020, y: -200}
+  position: {x: 1532, y: -200}
 --- !u!114 &840133427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1147,7 +1179,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &958642008
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1402,7 +1434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 4
-  position: {x: 1020, y: 100}
+  position: {x: 1532, y: 100}
 --- !u!114 &1169670925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1416,20 +1448,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Hide: {fileID: 467976537}
-  HidePosition: {x: 0, y: 0}
+  HidePosition: {x: 1340, y: -50}
   pause: {fileID: 457492554}
-  PausePosition: {x: 0, y: 0}
+  PausePosition: {x: 1340, y: -180}
   Ccontinue: {fileID: 1169670924}
-  ContinueHidePosition: {x: 0, y: 0}
+  ContinueHidePosition: {x: 1532, y: 100}
   Restart: {fileID: 1245185263}
-  RestartHidePosition: {x: 0, y: 0}
+  RestartHidePosition: {x: 1532, y: -50}
   BackToMenu: {fileID: 840133426}
-  BackToMenuHidePosition: {x: 0, y: 0}
+  BackToMenuHidePosition: {x: 1532, y: -200}
   Exit: {fileID: 94771395}
-  ExitHidePosition: {x: 0, y: 0}
+  ExitHidePosition: {x: 1712, y: -350}
   Logo: {fileID: 159989135}
-  LogoHidePosition: {x: 0, y: 0}
+  LogoHidePosition: {x: -350, y: 150}
   timeScale: {fileID: 2130513157}
+  moveOn: {fileID: 1169670929}
+  moveOnPause: {fileID: 457492556}
 --- !u!114 &1169670926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1555,7 +1589,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 1020, y: 100}
+  m_AnchoredPosition: {x: 1532.0002, y: 100}
   m_SizeDelta: {x: 1494, y: 106}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!1 &1189960013
@@ -1759,7 +1793,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 1020, y: -50}
+  m_AnchoredPosition: {x: 1532.0002, y: -50}
   m_SizeDelta: {x: 1494, y: 106}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1245185262
@@ -1789,7 +1823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 4
-  position: {x: 1020, y: -50}
+  position: {x: 1532, y: -50}
 --- !u!114 &1245185264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1896,7 +1930,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d15e12ea22cfa534588835b3829f4b3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amebaGenerator: {fileID: 0}
+  amebaGenerator: {fileID: 1514778163}
 --- !u!1 &1256398268
 GameObject:
   m_ObjectHideFlags: 0
@@ -1934,7 +1968,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 85, y: -200}
+  m_AnchoredPosition: {x: 80, y: -200}
   m_SizeDelta: {x: 43, y: 47}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1256398270

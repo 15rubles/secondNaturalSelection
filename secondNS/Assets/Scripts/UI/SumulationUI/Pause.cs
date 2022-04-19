@@ -37,6 +37,11 @@ public class Pause : MonoBehaviour
     [SerializeField]
     Vector2 LogoPosition;
 
+    [SerializeField]
+    MoveOnMouseEnter moveOn;
+
+    [SerializeField]
+    MoveOnMouseEnter moveOnContinue;
     public void Click()
     {
         Time.timeScale = 0;
@@ -47,5 +52,7 @@ public class Pause : MonoBehaviour
         BackToMenu.position = BackToMenuPosition;
         Exit.position = ExitPosition;
         Logo.position = LogoPosition;
+        moveOn.enabled = false;
+        moveOnContinue.enabled = true;
     }
 }

@@ -41,6 +41,12 @@ public class Continue : MonoBehaviour
 
     [SerializeField]
     TimeScale timeScale;
+
+    [SerializeField]
+    MoveOnMouseEnter moveOn;
+
+    [SerializeField]
+    MoveOnMouseEnter moveOnPause;
     public void Click()
     {
         timeScale.UpdateTimescale();
@@ -51,5 +57,7 @@ public class Continue : MonoBehaviour
         BackToMenu.position = BackToMenuHidePosition;
         Exit.position = ExitHidePosition;
         Logo.position = LogoHidePosition;
+        moveOn.enabled = false;
+        moveOnPause.enabled = true;
     }
 }
