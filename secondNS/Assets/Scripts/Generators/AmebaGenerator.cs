@@ -38,9 +38,16 @@ public class AmebaGenerator : MonoBehaviour
     }
     private void Start()
     {
-        for (int i = 0; i < StartCount; i++)
+        if (globalInfo.GenerationFolder != "None")
         {
-            CreateNewAmeba();
+            //TODO
+        }
+        else
+        {
+            for (int i = 0; i < StartCount; i++)
+            {
+                CreateNewAmeba();
+            }
         }
     }
     private void FixedUpdate()
@@ -57,12 +64,7 @@ public class AmebaGenerator : MonoBehaviour
         if (time >= generationtime || amebascount.Count == 0)
         {
             int CountToDelete = AllAmebasInGeneration.Count;
-            SortAmebasByLifetimes();
-            Directory.CreateDirectory(globalInfo.projectPath + "/" + diractory + "/Generation_" + generation);
-            for (int i = 0; i < SafeToFileCount; i++)
-            {
-                AWIF.WritePrfectIntellectInFile(AllAmebasInGeneration[i].intellect, globalInfo.projectPath + "/" + diractory + "/Generation_" + generation, "Ameba" + i);
-            }
+            SaveCurrentAmebasGeneration();
             for (int i = 0; i < StartCount * PartOfNewFromOld; i++)
             {
                 CreateRandomAmebaFromList(AllAmebasInGeneration, SafeToFileCount);
@@ -72,9 +74,18 @@ public class AmebaGenerator : MonoBehaviour
                 CreateNewAmeba();
             }
             KillAndDeleteOldAmebas(CountToDelete);
-            generation++;
             time = 0;
         }
+    }
+    public void SaveCurrentAmebasGeneration()
+    {
+        SortAmebasByLifetimes();
+        Directory.CreateDirectory(globalInfo.projectPath + "/" + diractory + "/Generation_" + generation);
+        for (int i = 0; i < SafeToFileCount; i++)
+        {
+            AWIF.WritePrfectIntellectInFile(AllAmebasInGeneration[i].intellect, globalInfo.projectPath + "/" + diractory + "/Generation_" + generation, "Ameba" + i);
+        }
+        generation++;
     }
     private void CreateNewAmeba()
     {

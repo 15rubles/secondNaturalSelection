@@ -12,7 +12,6 @@ public class Timer : MonoBehaviour
         txt = gameObject.GetComponent<Text>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         timer += Time.deltaTime;

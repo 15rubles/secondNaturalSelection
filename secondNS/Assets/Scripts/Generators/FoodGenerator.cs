@@ -3,21 +3,33 @@ using UnityEngine;
 
 public class FoodGenerator : MonoBehaviour
 {
-    GameObject food;
-    readonly int StartCount = 450;
-    readonly int MaxCount = 1500;
-    readonly float timedelay = 0.015f;
-    private float timer = 0;
-    List<GameObject> AllFood = new List<GameObject>();
     [SerializeField]
+    readonly int StartCount = 450;
+    [SerializeField]
+    readonly int MaxCount = 1500;
+    [SerializeField]
+    readonly float timedelay = 0.015f;
+    [SerializeField]
+    private float timer = 0;
+
+    GameObject food;
+    Starter starter;
+    List<GameObject> AllFood = new List<GameObject>();
     float leftborder, rightborder, upborder, downborder;
     Vector3 point;
     private void Awake()
     {
         food = (GameObject)Resources.Load("food");
+        starter = GameObject.Find("Starter").GetComponent<Starter>();
     }
     private void Start()
     {
+        MapName mn = starter.enviroment.GetComponent<MapName>();
+        leftborder = -mn.Size.x/2;
+        rightborder = mn.Size.x/2;
+        upborder = mn.Size.y / 2;
+        downborder = -mn.Size.y / 2;
+
         for (int i = 0; i < StartCount; i++)
         {
             while (Physics2D.OverlapPoint(point))
