@@ -6,6 +6,7 @@ public class AmebaGenerator : MonoBehaviour
 {
     List<GameObject> amebascount = new List<GameObject>();
     List<AmebaData> AllAmebasInGeneration = new List<AmebaData>();
+    
     [SerializeField]
     float leftborder, rightborder, upborder, downborder;
     
@@ -40,7 +41,13 @@ public class AmebaGenerator : MonoBehaviour
     {
         if (globalInfo.GenerationFolder != "None")
         {
-            //TODO
+            PerfectIntellect perfectIntellect;
+            foreach (string filename in Directory.GetFiles(globalInfo.projectPath + "/" + globalInfo.GenerationFolder + "/Generation_" + globalInfo.ChoosedGenerationNumber))
+            {
+                perfectIntellect = AWIF.ReadAllPrfectIntellectFromFile(globalInfo.projectPath + "/" + globalInfo.GenerationFolder + "/Generation_" + globalInfo.ChoosedGenerationNumber, filename);
+                CreateNewAmeba(perfectIntellect);
+            }
+            FillFromItself(StartCount - SafeToFileCount);
         }
         else
         {
@@ -87,12 +94,28 @@ public class AmebaGenerator : MonoBehaviour
         }
         generation++;
     }
+    private void FillFromItself(int count)
+    {
+        int uniccount = amebascount.Count;
+        for (int i = 0; i < count; i++)
+        {
+            CreateNewAmeba(amebascount[Random.Range(0, uniccount)].GetComponent<PerfectAmeba>().intellect);
+        }
+    }
     private void CreateNewAmeba()
     {
         GameObject gameObject = Instantiate(ameba, new Vector3(Random.Range(leftborder, rightborder), Random.Range(upborder, downborder), 0), new Quaternion());
         amebaobj = gameObject.GetComponent<PerfectAmeba>();
         amebaobj.amebaGenerator = this;
         amebaobj.intellect = new PerfectIntellect(24, 15, 3, 50);
+        AddAmebaInList(gameObject);
+    }
+    private void CreateNewAmeba(PerfectIntellect pi)
+    {
+        GameObject gameObject = Instantiate(ameba, new Vector3(Random.Range(leftborder, rightborder), Random.Range(upborder, downborder), 0), new Quaternion());
+        amebaobj = gameObject.GetComponent<PerfectAmeba>();
+        amebaobj.amebaGenerator = this;
+        amebaobj.intellect = new PerfectIntellect(pi);
         AddAmebaInList(gameObject);
     }
     private void CreateRandomAmebaFromList(List<AmebaData> amebas, int rightb)
