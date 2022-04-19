@@ -1,11 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class MusicCenter : MonoBehaviour
 {
-    public void Awake()
+    AudioClip[] playlist;
+    AudioSource source;
+    void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        playlist = Resources.LoadAll<AudioClip>("Music");
+        source = gameObject.GetComponent<AudioSource>();
+        source.clip = playlist[0];
+    }
+
+    void Start()
+    {
+        source.Play();
+    }
+
+    void Update()
+    {
+        if (!source.isPlaying)
+            playRandomMusic();
+    }
+
+    void playRandomMusic()
+    {
+        source.clip = playlist[Random.Range(0, playlist.Length)];
+        source.Play();
     }
 }
