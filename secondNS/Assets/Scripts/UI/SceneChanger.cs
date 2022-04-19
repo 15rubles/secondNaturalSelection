@@ -16,7 +16,7 @@ public class SceneChanger : MonoBehaviour
 
     string SceneName;
     bool hiding = false;
-    bool opening = false;
+    bool opening = true;
     float time = 0;
     private void Awake()
     {

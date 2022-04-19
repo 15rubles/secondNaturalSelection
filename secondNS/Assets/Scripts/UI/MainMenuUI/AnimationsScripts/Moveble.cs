@@ -13,6 +13,7 @@ public class Moveble : MonoBehaviour
     }
     void Update()
     {
-        RT.anchoredPosition = Vector3.Lerp(RT.anchoredPosition, new Vector3(position.x, position.y, RT.position.z), Speed * Time.deltaTime);
+        RT.anchoredPosition = Vector3.Lerp(RT.anchoredPosition, new Vector3(position.x, position.y, RT.position.z), Speed * Time.unscaledDeltaTime);
     }
+    
 }
