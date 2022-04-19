@@ -25,10 +25,10 @@ public class FoodGenerator : MonoBehaviour
     private void Start()
     {
         MapName mn = starter.enviroment.GetComponent<MapName>();
-        leftborder = -mn.Size.x/2;
-        rightborder = mn.Size.x/2;
-        upborder = mn.Size.y / 2;
-        downborder = -mn.Size.y / 2;
+        leftborder = -mn.Size.x;
+        rightborder = mn.Size.x;
+        upborder = mn.Size.y;
+        downborder = -mn.Size.y;
 
         for (int i = 0; i < StartCount; i++)
         {
